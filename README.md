@@ -2,6 +2,10 @@
 
 - Create React App
 - Configured TailwindCSS
+- Installed react-router-dom
+- Header
+- Login Form
+- Sign Up form
 
 # Features
 - Login/Sign Up
