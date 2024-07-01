@@ -4,8 +4,11 @@
 - Configured TailwindCSS
 - Installed react-router-dom
 - Header
+- Routing
 - Login Form
 - Sign Up form
+- Form Validation
+- UseRef Hook
 
 # Features
 - Login/Sign Up
