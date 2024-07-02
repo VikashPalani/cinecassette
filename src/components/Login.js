@@ -3,10 +3,13 @@ import { BGIMAGE } from "../utils/constants";
 import Header from "./Header";
 import {checkValidData} from "../utils/Validate";
 
+import {signInWithEmailAndPassword,createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
+
 const Login = () => {
 
   const[isSignInForm, setIsSignInForm] = useState(true);
-const [errMessage, setErrMessage] = useState(null);
+  const [errMessage, setErrMessage] = useState(null);
 
   //Used useRef hook for form validation
   const name = useRef(null);
@@ -18,10 +21,43 @@ const [errMessage, setErrMessage] = useState(null);
   }
 
   const handleButtonClick = () => {
-    //Validate the form data
-    const message = checkValidData(name.current.value,email.current.value,password.current.value);
-    setErrMessage(message);
 
+    const nameValue = name.current ? name.current.value : '';
+    const emailValue = email.current ? email.current.value : '';
+    const passwordValue = password.current ? password.current.value : '';
+
+    //Validate the form data
+    const message = checkValidData(nameValue, emailValue, passwordValue);
+    setErrMessage(message);
+    if(message) return;
+
+    if(!isSignInForm){
+      //SignUp logic
+      createUserWithEmailAndPassword(auth, emailValue, passwordValue)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrMessage(errorCode + "-" + errorMessage);
+        });
+    }
+    else{
+      //SignIn logic
+      signInWithEmailAndPassword(auth, emailValue, passwordValue)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrMessage(errorCode + "-" + errorMessage);
+        });
+    } 
   }
 
   return (

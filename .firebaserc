@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "cine-cassette1",
+    "Cine Cassette": "cine-cassette1"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}
