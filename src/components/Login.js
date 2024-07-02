@@ -2,14 +2,17 @@ import { useRef, useState } from "react";
 import { BGIMAGE } from "../utils/constants";
 import Header from "./Header";
 import {checkValidData} from "../utils/Validate";
+import { useNavigate } from "react-router-dom";
 
 import {signInWithEmailAndPassword,createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { updateProfile } from "firebase/auth";
 
 const Login = () => {
 
   const[isSignInForm, setIsSignInForm] = useState(true);
   const [errMessage, setErrMessage] = useState(null);
+  const navigate = useNavigate();
 
   //Used useRef hook for form validation
   const name = useRef(null);
@@ -22,21 +25,29 @@ const Login = () => {
 
   const handleButtonClick = () => {
 
-    const nameValue = name.current ? name.current.value : '';
-    const emailValue = email.current ? email.current.value : '';
-    const passwordValue = password.current ? password.current.value : '';
-
     //Validate the form data
-    const message = checkValidData(nameValue, emailValue, passwordValue);
+    const message = checkValidData(email.current.value, password.current.value);
     setErrMessage(message);
     if(message) return;
 
     if(!isSignInForm){
       //SignUp logic
-      createUserWithEmailAndPassword(auth, emailValue, passwordValue)
+      createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
         .then((userCredential) => {
           const user = userCredential.user;
+
+          updateProfile(user, {
+            displayName: name.current.value
+          }).then(() => {
+            // Profile updated!
+            navigate("/browse")
+          }).catch((error) => {
+            // An error occurred
+            setErrMessage(error.message);
+          });
+
           console.log(user);
+          navigate("/browse")
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -44,13 +55,15 @@ const Login = () => {
           setErrMessage(errorCode + "-" + errorMessage);
         });
     }
+    
     else{
       //SignIn logic
-      signInWithEmailAndPassword(auth, emailValue, passwordValue)
+      signInWithEmailAndPassword(auth, email.current.value, password.current.value)
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
           console.log(user);
+          navigate("/browse")
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -69,7 +82,7 @@ const Login = () => {
         </div>
         <form
           onSubmit={(e) => e.preventDefault()}
-          className="w-3/12 absolute p-12 bg-black bg-opacity-80 my-36 mx-auto right-0 left-0 text-white"
+          className="w-3/12 absolute p-12 bg-black bg-opacity-80 my-[200px] mx-auto right-0 left-0 text-white"
         >
           <h1 className="m-2 font-bold text-3xl py-4">{isSignInForm? "Sign In" : "Sign Up"}</h1>
 
