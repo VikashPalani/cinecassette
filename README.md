@@ -14,7 +14,8 @@
 - Create SignUp user account
 - Implement Sign In user API (from firebase Docs)
 - Created Redux store with userSlice
-- 
+- Implemented Signout
+- Update Profile
 
 
 # Features

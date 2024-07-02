@@ -3,11 +3,13 @@ import { FaUser } from "react-icons/fa";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 const Header = () => {
 
   const navigate = useNavigate();
+  const user = useSelector(store => store.user)
 
   const handleSignOut = () => {
     signOut(auth).then(() => {
@@ -26,15 +28,17 @@ const Header = () => {
         src={WHITELOGO}
         alt = "Logo" 
       />
-      <div className="flex gap-8">
-        <FaUser className="text-white text-3xl font-bold my-10"/>
-        <button 
-          onClick={handleSignOut}
-          className="text-white font-medium italic bg-red-700 rounded-lg w-20 h-10 my-9"
-        >
-          Sign Out
-        </button>
-      </div>
+      {user && 
+        (<div className="flex gap-8">
+          <FaUser className="text-white text-3xl font-bold my-10"/>
+          <button 
+            onClick={handleSignOut}
+            className="text-white font-medium italic bg-red-700 rounded-lg w-20 h-10 my-9"
+          >
+            Sign Out
+          </button>
+        </div>)
+      }
     </div>
   )
 }

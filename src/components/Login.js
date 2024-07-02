@@ -3,16 +3,19 @@ import { BGIMAGE } from "../utils/constants";
 import Header from "./Header";
 import {checkValidData} from "../utils/Validate";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import {signInWithEmailAndPassword,createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { updateProfile } from "firebase/auth";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
 
   const[isSignInForm, setIsSignInForm] = useState(true);
   const [errMessage, setErrMessage] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   //Used useRef hook for form validation
   const name = useRef(null);
@@ -40,6 +43,9 @@ const Login = () => {
             displayName: name.current.value
           }).then(() => {
             // Profile updated!
+            const {uid, email, displayName} = auth.currentUser;
+            dispatch(addUser({uid: uid, email: email, displayName: displayName}));
+            
             navigate("/browse")
           }).catch((error) => {
             // An error occurred
