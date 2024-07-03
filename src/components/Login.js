@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import { BGIMAGE } from "../utils/constants";
 import Header from "./Header";
 import {checkValidData} from "../utils/Validate";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import {signInWithEmailAndPassword,createUserWithEmailAndPassword } from "firebase/auth";
@@ -14,7 +13,6 @@ const Login = () => {
 
   const[isSignInForm, setIsSignInForm] = useState(true);
   const [errMessage, setErrMessage] = useState(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   //Used useRef hook for form validation
@@ -45,15 +43,11 @@ const Login = () => {
             // Profile updated!
             const {uid, email, displayName} = auth.currentUser;
             dispatch(addUser({uid: uid, email: email, displayName: displayName}));
-            
-            navigate("/browse")
           }).catch((error) => {
             // An error occurred
             setErrMessage(error.message);
           });
 
-          console.log(user);
-          navigate("/browse")
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -68,8 +62,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
-          console.log(user);
-          navigate("/browse")
         })
         .catch((error) => {
           const errorCode = error.code;

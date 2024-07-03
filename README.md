@@ -15,7 +15,15 @@
 - Implement Sign In user API (from firebase Docs)
 - Created Redux store with userSlice
 - Implemented Signout
-- Update Profile
+- Update Profile (Name)
+- Bugfix: Signup user displayname update
+- Bugfix: If the user is not logged in Redirect /browse to login page and Vice versa.
+- Unsubscribed to the onAuthStateChanged callback
+- Add hardcoded values to the constants file (Export images from there)
+- Register in TMDB API and create an app and get access tokens.
+- Get data from TMDB now palying movies list API
+
+
 
 
 # Features
