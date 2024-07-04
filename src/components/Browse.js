@@ -6,20 +6,12 @@ import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 const Browse = () => {
 
   useNowPlayingMovies();
-
+  
   return (
     <div>
       <Header />
       <MainContainer />
       <SecondaryContainer />
-      {/* 
-      Main Container
-        - Video Background
-        - Video Title
-      Secondary Container
-        - Movie List * n
-        - cards * n
-      */}
     </div>
   );
 };

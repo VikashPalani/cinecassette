@@ -2,12 +2,14 @@ export const LOGO= require("./images/logo.png");
 export const WHITELOGO= require("./images/white.png");
 export const BGIMAGE= require("./images/background.png");
 
+export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500/"
+
 export const API_OPTIONS = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNWMxNDg4N2QxYmNlYTAwZjkxNGU3YTdiYmYxY2ZhMSIsIm5iZiI6MTcxOTk3ODEzNy43ODgwOTIsInN1YiI6IjY2N2QwOGQwYTVjNDA3ZDMxMzExZWZkYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.SrQ57BjU0bZeYwle5Uvh4xs6oXFbTdAbPvG0MG_mG2U'
-    }
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNWMxNDg4N2QxYmNlYTAwZjkxNGU3YTdiYmYxY2ZhMSIsIm5iZiI6MTcyMDA2ODMyNS4zNTQ5NTEsInN1YiI6IjY2N2QwOGQwYTVjNDA3ZDMxMzExZWZkYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vCqggvnfAVnJUFgGKVDvS0IqZ-vDfK_00TBBMC2-lDU'
+  }
 };
 
 //Deployed URL: cine-cassette1.web.app
