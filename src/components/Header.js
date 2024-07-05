@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
 import { onAuthStateChanged } from "firebase/auth";
+import { toggleGptSearchView } from "../utils/gptSlice";
 
 
 
@@ -48,6 +49,11 @@ const Header = () => {
     });
   }
 
+  const handleGptSearchClick = () => {
+    dispatch(toggleGptSearchView());
+  }
+
+
   return (
     <div className="absolute w-full bg-gradient-to-b from-black px-10 py-4 z-10 flex justify-between">
       <img
@@ -56,8 +62,14 @@ const Header = () => {
         alt = "Logo" 
       />
       {user && 
-        (<div className="flex gap-8">
+        (<div className="flex gap-4">
           <FaUser className="text-white text-3xl font-bold my-10"/>
+          <button
+            onClick={handleGptSearchClick}
+            className="text-white font-medium italic bg-red-700 rounded-lg w-32 h-10 my-9"
+          >
+            GPT Search
+          </button>
           <button 
             onClick={handleSignOut}
             className="text-white font-medium italic bg-red-700 rounded-lg w-20 h-10 my-9"
