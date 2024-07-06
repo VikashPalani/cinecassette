@@ -34,6 +34,9 @@
 - Build Movies and Series List
 - Build Movie and series card
 - TMDB Image CDN URL
+- GPT Search Pages
+- GPT Search Bar
+- Multi-language feature in GPT search page
 
 
 
