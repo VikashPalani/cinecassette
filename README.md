@@ -37,6 +37,10 @@
 - GPT Search Pages
 - GPT Search Bar
 - Multi-language feature in GPT search page
+- Memoization
+- Responsive UI
+
+- (Adding .env file to gitignore)
 
 
 

@@ -61,14 +61,14 @@ const Header = () => {
 
 
   return (
-    <div className="absolute w-full bg-gradient-to-b from-black px-10 py-4 z-10 flex justify-between">
+    <div className="absolute w-full bg-gradient-to-b from-black px-10 py-4 z-10 flex flex-col md:flex-row justify-between">
       <img
-        className="w-36"
+        className="w-36 mx-auto md:mx-0"
         src={WHITELOGO}
         alt = "Logo" 
       />
       {user && 
-        (<div className="flex gap-4">
+        (<div className="flex gap-4  justify-center md:justify-end">
 
           <FaUser className="text-white text-3xl font-bold my-10"/>
 

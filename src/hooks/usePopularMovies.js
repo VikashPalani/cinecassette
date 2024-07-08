@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { API_OPTIONS } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addPopularMovies } from "../utils/movieSlice";
+import { useSelector } from "react-redux";
 
 
 //Custom hooks are normal JS function (Utility Function)
@@ -10,6 +11,8 @@ const usePopularMovies = () => {
 
   //Fetch data from TMDB API and updating the store.
   const dispatch = useDispatch();
+
+  const popular = useSelector((store) => store.movies.popularMovies);
 
   const getPopularMovies = async () => {
     try {
@@ -28,7 +31,8 @@ const usePopularMovies = () => {
   };
 
   useEffect(() => { 
-    getPopularMovies();
+    //Memoization
+    if(!popular) getPopularMovies();
   }, []);
 
 }
